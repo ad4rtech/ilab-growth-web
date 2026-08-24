@@ -128,7 +128,7 @@ export function ManageUserDialog({
             <Select
               items={ROLE_ITEMS}
               value={role}
-              onValueChange={setRole}
+              onValueChange={(v) => v !== null && setRole(v)}
               disabled={isSelf}
             >
               <SelectTrigger className="w-full">

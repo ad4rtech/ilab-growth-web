@@ -96,7 +96,7 @@ export function SubscribersToolbar() {
 
         <Select
           value={searchParams.get("status") ?? "all"}
-          onValueChange={(v) => updateParam("status", v)}
+          onValueChange={(v) => updateParam("status", v ?? "all")}
           items={STATUS_ITEMS}
         >
           <SelectTrigger className="w-[160px]">

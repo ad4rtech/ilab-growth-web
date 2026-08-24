@@ -177,7 +177,7 @@ export function ServiceForm({ initial }: ServiceFormProps) {
 
         <div className="space-y-2">
           <Label>Icon</Label>
-          <Select value={icon} onValueChange={setIcon} items={SERVICE_ICON_OPTIONS.map((o) => ({ value: o.value, label: o.label }))}>
+          <Select value={icon} onValueChange={(v) => v !== null && setIcon(v)} items={SERVICE_ICON_OPTIONS.map((o) => ({ value: o.value, label: o.label }))}>
             <SelectTrigger>
               <SelectValue>
                 <span className="flex items-center gap-2">
@@ -201,7 +201,7 @@ export function ServiceForm({ initial }: ServiceFormProps) {
 
         <div className="space-y-2">
           <Label>Status</Label>
-          <Select value={status} onValueChange={setStatus} items={STATUS_ITEMS}>
+          <Select value={status} onValueChange={(v) => v !== null && setStatus(v)} items={STATUS_ITEMS}>
             <SelectTrigger>
               <SelectValue />
             </SelectTrigger>
@@ -276,7 +276,7 @@ export function ServiceForm({ initial }: ServiceFormProps) {
           </div>
           <Select
             value={category || "none"}
-            onValueChange={(v) => setCategory(v === "none" ? "" : v)}
+            onValueChange={(v) => setCategory(v && v !== "none" ? v : "")}
             items={[{ value: "none", label: "No category" }, ...categories.map((c) => ({ value: c.name, label: c.name }))]}
           >
             <SelectTrigger>

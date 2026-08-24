@@ -187,7 +187,7 @@ export function ServicesToolbar({ atCapacity, maxServices }: ServicesToolbarProp
 
           <Select
             value={searchParams.get("category") ?? "all"}
-            onValueChange={(v) => updateParam("category", v)}
+            onValueChange={(v) => updateParam("category", v ?? "all")}
             items={[{ value: "all", label: "All Categories" }, ...categories.map((c) => ({ value: c.name, label: c.name }))]}
           >
             <SelectTrigger className="w-[160px]">
@@ -205,7 +205,7 @@ export function ServicesToolbar({ atCapacity, maxServices }: ServicesToolbarProp
 
           <Select
             value={searchParams.get("status") ?? "all"}
-            onValueChange={(v) => updateParam("status", v)}
+            onValueChange={(v) => updateParam("status", v ?? "all")}
             items={STATUS_ITEMS}
           >
             <SelectTrigger className="w-[150px]">

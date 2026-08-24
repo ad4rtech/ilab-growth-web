@@ -82,7 +82,7 @@ export function BlogSortSelect({ basePath = "/blog" }: { basePath?: string }) {
   }
 
   return (
-    <Select value={activeSort} onValueChange={setSort}>
+    <Select value={activeSort} onValueChange={(v) => v !== null && setSort(v)}>
       <SelectTrigger className="w-[170px]">
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>

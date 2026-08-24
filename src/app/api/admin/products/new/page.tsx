@@ -251,7 +251,7 @@ export default function NewProductPage() {
                   placeholder="Select a category"
                   items={categories.map((c) => c.name)}
                   value={category}
-                  onValueChange={setCategory}
+                  onValueChange={(v) => v !== null && setCategory(v)}
                   onCreate={handleCreateCategory}
                 />
               </div>
@@ -270,7 +270,7 @@ export default function NewProductPage() {
                   placeholder="Select a type"
                   items={productTypes.map((t) => t.name)}
                   value={productType}
-                  onValueChange={setProductType}
+                  onValueChange={(v) => v !== null && setProductType(v)}
                   onCreate={handleCreateProductType}
                 />
               </div>

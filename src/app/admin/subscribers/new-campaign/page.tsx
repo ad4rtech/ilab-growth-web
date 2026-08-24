@@ -140,11 +140,11 @@ export default function NewCampaignPage() {
               </Button>
 
               <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button type="button" disabled={loading || !subject.trim() || !body.trim()}>
-                    Send Now
-                  </Button>
-                </AlertDialogTrigger>
+            <AlertDialogTrigger
+  render={<Button type="button" disabled={loading || !subject.trim() || !body.trim()} />}
+>
+  Send Now
+</AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>Send this campaign now?</AlertDialogTitle>

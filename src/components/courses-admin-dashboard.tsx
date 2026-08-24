@@ -125,7 +125,7 @@ export function CoursesAdminDashboard({
               className="pl-9"
             />
           </div>
-          <Select items={categoryItems} value={category} onValueChange={setCategory}>
+          <Select items={categoryItems} value={category} onValueChange={(v) => v !== null && setCategory(v)}>
             <SelectTrigger className="w-[160px]">
               <SelectValue />
             </SelectTrigger>
@@ -137,7 +137,7 @@ export function CoursesAdminDashboard({
               ))}
             </SelectContent>
           </Select>
-          <Select items={STATUS_ITEMS} value={status} onValueChange={setStatus}>
+          <Select items={STATUS_ITEMS} value={status} onValueChange={(v) => v !== null && setStatus(v)}>
             <SelectTrigger className="w-[150px]">
               <SelectValue />
             </SelectTrigger>

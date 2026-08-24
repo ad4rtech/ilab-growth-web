@@ -12,7 +12,7 @@ interface SessionRow {
   ipAddress: string | null;
   userAgent: string | null;
   createdAt: string;
-  isCurrent?: boolean;
+  isCurrent: boolean;
 }
 
 function parseDevice(userAgent: string | null): { label: string; isMobile: boolean } {
@@ -33,10 +33,21 @@ export function ActiveSessions() {
 
   async function loadSessions() {
     try {
-      const result = await authClient.listSessions();
-      const list = (result?.data ?? result) as SessionRow[] | undefined;
-      if (!Array.isArray(list)) throw new Error("Unexpected response shape");
-      setSessions(list);
+      const [{ data: sessionList, error: listError }, { data: current }] = await Promise.all([
+        authClient.listSessions(),
+        authClient.getSession(),
+      ]);
+      if (listError || !sessionList) throw new Error(listError?.message ?? "Unexpected response shape");
+
+      const rows: SessionRow[] = sessionList.map((s) => ({
+        id: s.id,
+        token: s.token,
+        ipAddress: s.ipAddress ?? null,
+        userAgent: s.userAgent ?? null,
+        createdAt: s.createdAt.toString(),
+        isCurrent: s.id === current?.session.id,
+      }));
+      setSessions(rows);
     } catch {
       setUnsupported(true);
     }

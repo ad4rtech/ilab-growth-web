@@ -46,7 +46,8 @@ export function CreatableSelect({
     { value: CREATE_VALUE, label: `Add new ${label.toLowerCase()}...` },
   ];
 
-  function handleChange(v: string) {
+  function handleChange(v: string | null) {
+    if (v === null) return;
     if (v === CREATE_VALUE) {
       setDialogOpen(true);
       return;

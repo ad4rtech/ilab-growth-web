@@ -26,7 +26,7 @@ export function DateRangeSelect({
   const [value, setValue] = useState(variant === "compact" ? "this-week" : "7d");
 
   return (
-    <Select items={RANGES} value={value} onValueChange={setValue}>
+    <Select items={RANGES} value={value} onValueChange={(v) => v !== null && setValue(v)}>
       <SelectTrigger className={variant === "compact" ? "w-[150px]" : "w-[200px]"}>
         {variant === "default" && <Calendar className="mr-1 h-4 w-4" />}
         <SelectValue />

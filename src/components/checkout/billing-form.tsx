@@ -73,7 +73,7 @@ export function BillingForm({ value, onChange }: BillingFormProps) {
           <Label>Country</Label>
           <Select
             value={value.country || "none"}
-            onValueChange={(v) => update("country", v === "none" ? "" : v)}
+            onValueChange={(v) => update("country", v && v !== "none" ? v : "")}
             items={[{ value: "none", label: "Select a country" }, ...COUNTRIES.map((c) => ({ value: c, label: c }))]}
           >
             <SelectTrigger>

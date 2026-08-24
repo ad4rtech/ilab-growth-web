@@ -97,12 +97,14 @@ export function UsersToolbarButtons() {
   return (
     <div className="flex items-center gap-2">
       <Dialog open={inviteOpen} onOpenChange={setInviteOpen}>
-        <DialogTrigger asChild>
-          <Button type="button" className="gap-2 bg-blue-700 hover:bg-blue-800">
-            <UserPlus className="h-4 w-4" />
-            Invite User
-          </Button>
-        </DialogTrigger>
+        <DialogTrigger
+  render={
+    <Button type="button" className="gap-2 bg-blue-700 hover:bg-blue-800">
+      <UserPlus className="h-4 w-4" />
+      Invite User
+    </Button>
+  }
+/>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Invite a new user</DialogTitle>
@@ -120,7 +122,7 @@ export function UsersToolbarButtons() {
             </div>
             <div className="space-y-2">
               <Label>Role</Label>
-              <Select value={inviteRole} onValueChange={setInviteRole} items={[{ value: "user", label: "User" }, { value: "admin", label: "Admin" }]}>
+              <Select value={inviteRole} onValueChange={(v) => v !== null && setInviteRole(v)} items={[{ value: "user", label: "User" }, { value: "admin", label: "Admin" }]}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>

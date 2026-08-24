@@ -164,7 +164,7 @@ export function SalesReportsToolbar({ exportRows }: { exportRows: ExportRow[] })
 
         <Select
           value={category}
-          onValueChange={(v) => updateParams({ category: v })}
+          onValueChange={(v) => updateParams({ category: v ?? "all" })}
           items={CATEGORY_ITEMS}
         >
           <SelectTrigger className="w-[170px]" size="sm">

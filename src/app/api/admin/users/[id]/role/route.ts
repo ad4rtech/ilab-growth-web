@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 
+const VALID_ROLES = ["user", "admin"] as const;
+type Role = (typeof VALID_ROLES)[number];
+
+function isValidRole(value: string): value is Role {
+  return (VALID_ROLES as readonly string[]).includes(value);
+}
+
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -21,7 +28,7 @@ export async function PATCH(
   const body = await request.json().catch(() => ({}));
   const newRole: string | undefined = body?.role;
 
-  if (!newRole || !["user", "admin"].includes(newRole)) {
+  if (!newRole || !isValidRole(newRole)) {
     return NextResponse.json(
       { message: "Role must be 'user' or 'admin'." },
       { status: 400 }
@@ -37,7 +44,7 @@ export async function PATCH(
 
   try {
     await auth.api.setRole({
-      body: { userId: id, role: newRole },
+      body: { userId: id, role: newRole }, // now typed as "user" | "admin", not string
       headers: reqHeaders,
     });
     return NextResponse.json({ success: true });

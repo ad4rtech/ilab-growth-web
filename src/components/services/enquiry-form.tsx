@@ -134,7 +134,7 @@ export function EnquiryForm({ services, defaultName = "", defaultEmail = "" }: E
           <Label>Service of Interest</Label>
           <Select
             value={serviceId || "none"}
-            onValueChange={(v) => setServiceId(v === "none" ? "" : v)}
+            onValueChange={(v) => setServiceId(v && v !== "none" ? v : "")}
             items={[{ value: "none", label: "Select a service..." }, ...services.map((s) => ({ value: s.id, label: s.title }))]}
           >
             <SelectTrigger className="bg-white">

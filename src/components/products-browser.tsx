@@ -156,6 +156,7 @@ export function ProductsBrowser({
         <RadioGroup
           value={category}
           onValueChange={(v) => {
+            if (v === null) return;
             setCategory(v);
             setPage(1);
           }}
@@ -213,6 +214,7 @@ export function ProductsBrowser({
         <RadioGroup
           value={priceRangeId}
           onValueChange={(v) => {
+            if (v === null) return;
             setPriceRangeId(v === priceRangeId ? "" : v);
             setPage(1);
           }}
@@ -327,7 +329,7 @@ export function ProductsBrowser({
           onValueChange={(v) => {
             setPage(1);
             if (v === ALL_TYPES_VALUE) setTypes(new Set());
-            else if (v !== MULTIPLE_TYPES_VALUE) setTypes(new Set([v]));
+            else if (v !== null && v !== MULTIPLE_TYPES_VALUE) setTypes(new Set([v]));
           }}
         >
           <SelectTrigger className="w-full lg:w-[170px]">
@@ -381,7 +383,7 @@ export function ProductsBrowser({
 
         <div className="flex items-center gap-2">
           <span className="text-sm text-muted-foreground">Sort by:</span>
-          <Select items={SORT_OPTIONS} value={sort} onValueChange={setSort}>
+          <Select items={SORT_OPTIONS} value={sort} onValueChange={(v) => v !== null && setSort(v)}>
             <SelectTrigger className="w-[170px]">
               <SelectValue />
             </SelectTrigger>

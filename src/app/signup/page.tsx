@@ -283,7 +283,7 @@ export default function SignUpPage() {
 
             <div className="space-y-2">
               <Label>Country</Label>
-              <Select value={country} onValueChange={setCountry}>
+           <Select value={country} onValueChange={(value) => value !== null && setCountry(value)}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select a country">
                     <span className="mr-2">

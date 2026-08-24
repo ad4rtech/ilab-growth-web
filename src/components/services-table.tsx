@@ -25,21 +25,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Trash2, Pencil, Briefcase } from "lucide-react";
+import { AdminService } from "@/lib/services-admin";
 
-export type Service = {
-  id: string;
-  title: string;
-  description: string | null;
-  price: number | null;
-  compareAtPrice: number | null;
-  category: string | null;
-  serviceType: string | null;
-  badge: string | null;
-  status: string;
-  createdAt: string;
-};
-
-export function ServicesTable({ initialServices }: { initialServices: Service[] }) {
+export function ServicesTable({ initialServices }: { initialServices: AdminService[] }) {
   const [services, setServices] = useState(initialServices);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
@@ -99,14 +87,7 @@ export function ServicesTable({ initialServices }: { initialServices: Service[] 
               {s.price === null ? (
                 <span className="text-muted-foreground">Custom quote</span>
               ) : (
-                <div className="flex items-baseline gap-2">
-                  <span>{formatKES(s.price)}</span>
-                  {s.compareAtPrice && s.compareAtPrice > s.price && (
-                    <span className="text-xs text-muted-foreground line-through">
-                      {formatKES(s.compareAtPrice)}
-                    </span>
-                  )}
-                </div>
+                <span>{formatKES(s.price)}</span>
               )}
             </TableCell>
             <TableCell>

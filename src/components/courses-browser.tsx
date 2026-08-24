@@ -37,8 +37,8 @@ const SORT_OPTIONS = [
 const ALL_LEVELS_VALUE = "All Levels";
 const MULTIPLE_LEVELS_VALUE = "__multiple__";
 
-export function CoursesBrowser({ courses, userId }: { courses: Course[]; userId: string }) {
-  const [search, setSearch] = useState("");
+export function CoursesBrowser({ courses, userId }: { courses: Course[]; userId?: string }) {
+const [search, setSearch] = useState("");
   const [category, setCategory] = useState<string>("All Courses");
   const [levels, setLevels] = useState<Set<string>>(new Set());
   const [priceRangeId, setPriceRangeId] = useState<string>("");
@@ -160,6 +160,7 @@ export function CoursesBrowser({ courses, userId }: { courses: Course[]; userId:
         <RadioGroup
           value={category}
           onValueChange={(v) => {
+            if (v === null) return;
             setCategory(v);
             setPage(1);
           }}
@@ -217,6 +218,7 @@ export function CoursesBrowser({ courses, userId }: { courses: Course[]; userId:
         <RadioGroup
           value={priceRangeId}
           onValueChange={(v) => {
+            if (v === null) return;
             setPriceRangeId(v === priceRangeId ? "" : v);
             setPage(1);
           }}
@@ -331,7 +333,7 @@ export function CoursesBrowser({ courses, userId }: { courses: Course[]; userId:
           onValueChange={(v) => {
             setPage(1);
             if (v === ALL_LEVELS_VALUE) setLevels(new Set());
-            else if (v !== MULTIPLE_LEVELS_VALUE) setLevels(new Set([v]));
+            else if (v !== null && v !== MULTIPLE_LEVELS_VALUE) setLevels(new Set([v]));
           }}
         >
           <SelectTrigger className="w-full lg:w-[170px]">
@@ -385,7 +387,7 @@ export function CoursesBrowser({ courses, userId }: { courses: Course[]; userId:
 
         <div className="flex items-center gap-2">
           <span className="text-sm text-muted-foreground">Sort by:</span>
-          <Select items={SORT_OPTIONS} value={sort} onValueChange={setSort}>
+          <Select items={SORT_OPTIONS} value={sort} onValueChange={(v) => v !== null && setSort(v)}>
             <SelectTrigger className="w-[170px]">
               <SelectValue />
             </SelectTrigger>

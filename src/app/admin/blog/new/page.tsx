@@ -214,13 +214,19 @@ export default function NewBlogPostPage() {
                   placeholder="Select a category"
                   items={categories.map((c) => c.name)}
                   value={category}
-                  onValueChange={setCategory}
+                  onValueChange={(v) => v !== null && setCategory(v)}
                   onCreate={handleCreateCategory}
                 />
               </div>
               <div className="space-y-2">
                 <Label>Status</Label>
-                <Select items={STATUS_ITEMS} value={status} onValueChange={setStatus}>
+                <Select
+                  items={STATUS_ITEMS}
+                  value={status}
+                  onValueChange={(value) => {
+                    if (value !== null) setStatus(value);
+                  }}
+                >
                   <SelectTrigger className="w-full">
                     <SelectValue />
                   </SelectTrigger>

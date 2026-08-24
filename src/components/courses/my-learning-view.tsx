@@ -52,7 +52,7 @@ export function MyLearningView({ userId, enrollments }: { userId: string; enroll
             placeholder="Filter..."
             className="w-48"
           />
-          <Select items={STATUS_OPTIONS} value={status} onValueChange={setStatus}>
+          <Select items={STATUS_OPTIONS} value={status} onValueChange={(v) => v !== null && setStatus(v)}>
             <SelectTrigger className="w-[140px]">
               <SelectValue />
             </SelectTrigger>

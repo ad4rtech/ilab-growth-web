@@ -7,7 +7,7 @@ import {
   getMonthlyInquiries,
 } from "@/lib/services-admin";
 import { ServiceStatCards } from "@/components/admin/service-stat-cards";
-import { MonthlyInquiriesChart } from "@/components/admin/monthly-inquiries-chart";
+import { MonthlyBarChart } from "@/components/admin/monthly-inquiries-chart";
 import { TopServicesPanel } from "@/components/admin/top-services-panel";
 import { ServicesToolbar } from "@/components/admin/services-toolbar";
 import { ServicesPagination } from "@/components/admin/services-pagination";
@@ -25,12 +25,17 @@ export default async function AdminServicesPage({ searchParams }: AdminServicesP
   const category = params.category;
   const search = params.search;
 
-  const [listResponse, stats, topServices, monthlyInquiries] = await Promise.all([
+const [listResponse, stats, topServices, monthlyInquiries] = await Promise.all([
     getAdminServiceList({ page, status, category, search }),
     getServiceStats(),
     getTopServicesByInquiries(3),
     getMonthlyInquiries(12),
   ]);
+
+   const monthlyInquiriesData = monthlyInquiries.map((b) => ({
+    month: b.label,
+    count: b.inquiryCount,
+  }));
 
   const urlSearchParams = new URLSearchParams(
     Object.entries(params).filter((entry): entry is [string, string] => !!entry[1]),
@@ -48,7 +53,7 @@ export default async function AdminServicesPage({ searchParams }: AdminServicesP
       <ServiceStatCards stats={stats} />
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_320px]">
-        <MonthlyInquiriesChart data={monthlyInquiries} />
+        <MonthlyBarChart data={monthlyInquiriesData} />
         <TopServicesPanel services={topServices} />
       </div>
 

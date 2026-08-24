@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
+import { COUNTRIES } from "@/lib/countries";
 
 const STATUS_FILTERS = [
   { value: "", label: "All Statuses" },
@@ -17,14 +18,17 @@ const STATUS_FILTERS = [
 export function UsersFilterForm({
   initialQuery,
   initialStatus,
+  initialCountry,
 }: {
   initialQuery: string;
   initialStatus: string;
+  initialCountry: string;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(initialQuery);
   const [status, setStatus] = useState(initialStatus);
+  const [country, setCountry] = useState(initialCountry);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -33,6 +37,8 @@ export function UsersFilterForm({
     else params.delete("q");
     if (status) params.set("status", status);
     else params.delete("status");
+    if (country) params.set("country", country);
+    else params.delete("country");
     params.delete("page"); // reset pagination on a new filter
     router.push(`/admin/users?${params.toString()}`);
   }
@@ -49,13 +55,17 @@ export function UsersFilterForm({
         />
       </div>
 
-      {/* Inactive — no country field on the user model yet */}
       <select
-        disabled
-        title="Not collected yet — no country field on users"
-        className="h-9 rounded-md border bg-muted px-3 text-sm text-muted-foreground disabled:cursor-not-allowed"
+        value={country}
+        onChange={(e) => setCountry(e.target.value)}
+        className="h-9 rounded-md border bg-white px-3 text-sm"
       >
-        <option>All Countries</option>
+        <option value="">All Countries</option>
+        {COUNTRIES.map((c) => (
+  <option key={c.name} value={c.name}>
+    {c.flag} {c.name}
+  </option>
+))}
       </select>
 
       <select

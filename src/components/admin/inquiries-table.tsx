@@ -139,7 +139,7 @@ export function InquiriesTable({ initialInquiries }: { initialInquiries: AdminIn
             <TableCell>
               <Select
                 value={i.status}
-                onValueChange={(v) => handleStatusChange(i.id, v)}
+                onValueChange={(v) => v !== null && handleStatusChange(i.id, v)}
                 items={STATUS_ITEMS}
               >
                 <SelectTrigger className="h-8 w-[130px]">

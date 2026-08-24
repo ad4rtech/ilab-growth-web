@@ -296,7 +296,7 @@ export function CourseForm({
                   placeholder="Select a category"
                   items={categories.map((c) => c.name)}
                   value={category}
-                  onValueChange={setCategory}
+                  onValueChange={(v) => v !== null && setCategory(v)}
                   onCreate={handleCreateCategory}
                 />
               </div>
@@ -389,7 +389,7 @@ export function CourseForm({
               <Select
                 items={STATUS_ITEMS}
                 value={status}
-                onValueChange={setStatus}
+                onValueChange={(v) => v !== null && setStatus(v)}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select status" />

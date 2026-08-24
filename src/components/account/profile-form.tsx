@@ -203,8 +203,7 @@ export function ProfileForm({ initial }: ProfileFormProps) {
             <Label>Country</Label>
             <Select
               value={country || "none"}
-              onValueChange={(v) => setCountry(v === "none" ? "" : v)}
-              items={[{ value: "none", label: "Select a country" }, ...COUNTRIES.map((c) => ({ value: c, label: c }))]}
+              onValueChange={(v) => setCountry(v && v !== "none" ? v : "")}
             >
               <SelectTrigger>
                 <SelectValue />
@@ -243,8 +242,7 @@ export function ProfileForm({ initial }: ProfileFormProps) {
             <Label>Industry</Label>
             <Select
               value={industry || "none"}
-              onValueChange={(v) => setIndustry(v === "none" ? "" : v)}
-              items={[{ value: "none", label: "Select an industry" }, ...INDUSTRIES.map((i) => ({ value: i, label: i }))]}
+              onValueChange={(v) => setIndustry(v && v !== "none" ? v : "")}
             >
               <SelectTrigger>
                 <SelectValue />
@@ -263,8 +261,7 @@ export function ProfileForm({ initial }: ProfileFormProps) {
             <Label>Business Stage</Label>
             <Select
               value={businessStage || "none"}
-              onValueChange={(v) => setBusinessStage(v === "none" ? "" : v)}
-              items={[{ value: "none", label: "Select a stage" }, ...BUSINESS_STAGES.map((s) => ({ value: s, label: s }))]}
+              onValueChange={(v) => setBusinessStage(v && v !== "none" ? v : "")}
             >
               <SelectTrigger>
                 <SelectValue />

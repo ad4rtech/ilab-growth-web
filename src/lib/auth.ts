@@ -69,7 +69,7 @@ export const auth = betterAuth({
           return { data: user };
         },
       },
-      after: async (user) => {
+      after: async (user: { email: string } & Record<string, unknown>) => {
         // Mark the invitation used now that the account actually exists.
         // Separate from the "before" hook since we want this to run only
         // on confirmed success, not merely on an attempted signup.

@@ -28,7 +28,7 @@ import { Trash2, Pencil, FileText } from "lucide-react";
 export type BlogPost = {
   id: string;
   title: string;
-  excerpt: string | null;
+  excerpt?: string | null;
   category: string | null;
   status: string;
   displayStatus?: string; // "draft" | "published" | "scheduled" — falls back to status if absent
