@@ -7,6 +7,13 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL,
+  trustedOrigins: [
+    "http://localhost:3000",
+    process.env.BETTER_AUTH_URL,
+    "https://ilab-growth-web.vercel.app", // your stable production domain — adjust to the exact one
+    /^https:\/\/ilab-growth-.*-fidel-adars-projects\.vercel\.app$/, // matches any preview deploy URL
+  ].filter(Boolean) as (string | RegExp)[],
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
